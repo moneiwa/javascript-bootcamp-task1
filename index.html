@@ -1,14 +1,109 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Memory Game</title>
+
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    hello world
+    <h1>Memory Game</h1>
+    <h2> To win match all 8
+        pairs of cards, and all cards are face up.</h2>
+    <div class="game-board" id="game-board">
+
+    </div>
+    <!-- Design elements -->
+
+        <style>
+            #winCounter {
+                font-size: 20px;
+                margin-bottom: 10px;
+            }
+            .star-rating {
+                display: inline-block;
+            }
+            .star {
+                font-size: 30px;
+                cursor: pointer;
+            }
+            .star:hover,
+            .star:hover ~ .star {
+                color: gold;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="winCounter">Wins: 0</div>
+        <div class="star-rating">
+            <span class="star" data-value="1">&#9733;</span>
+            <span class="star" data-value="2">&#9733;</span>
+            <span class="star" data-value="3">&#9733;</span>
+            <span class="star" data-value="4">&#9733;</span>
+            <span class="star" data-value="5">&#9733;</span>
+        </div>
+        <div id="averageRating">Average Rating: 0</div>
+    
+        <script>
+        
+            let winCount = 0;
+    
+            function incrementWinCount() {
+                winCount++;
+                document.getElementById('winCounter').innerText = `Wins: ${winCount}`;
+            }
+    
+           
+            document.body.onload = function() {
+
+                incrementWinCount();
+            };
+    
+        
+            let ratings = [];
+            let stars = document.querySelectorAll('.star');
+    
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    let rating = this.getAttribute('data-value');
+                    ratings.push(parseInt(rating));
+                    updateAverageRating();
+                });
+            });
+    
+            function updateAverageRating() {
+                let sum = ratings.reduce((a, b) => a + b, 0);
+                let average = (sum / ratings.length).toFixed(1);
+                document.getElementById('averageRating').innerText = `Average Rating: ${average}`;
+            }
+        </script>
+    
+
+
+
+
+
+    
+
+<!-- Comments-->
+<div class="comments-section">
+    <h2>Comments</h2>
+    <div id="comments">
+        
+    </div>
+    <textarea id="commentInput" placeholder="Add your comment"></textarea>
+    <button id="submitComment">Submit</button>
+</div>
+
+    <p id="message"></p>
+    <button id="reset">Reset Game</button>
+    <script src="script.js"></script>
+<br>
+<br>
+
+    <a href="" target="_blank">memory game</a>. Developed
+    by <a href="#">Muneiwa Sithagu</a>.
 </body>
-<script src="variables.js"></script>
-<script src="datatype_operators"></script>
-<script src="conditionalStatements_loops.js"></script>
 </html>
